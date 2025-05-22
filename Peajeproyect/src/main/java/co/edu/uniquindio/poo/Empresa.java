@@ -21,34 +21,34 @@ public class Empresa {
     }
 
     //Obtener una lista de vehiculos por tipo de vehiculo
-    public LinkedList<Vehiculo> obtenerVehiculosTipo(Vehiculo vehiculoVerificar) {
+    public LinkedList<Vehiculo> obtenerVehiculosTipo(String tipo) {
         LinkedList<Vehiculo> vehiculosPorTipo = new LinkedList<>();
-        LinkedList<Vehiculo> vehiculosCarros = new LinkedList<>();
-        LinkedList<Vehiculo> vehiculosMotos = new LinkedList<>();
-        LinkedList<Vehiculo> vehiculosCamiones = new LinkedList<>();
 
         for (Vehiculo vehiculo : listVehiculos) {
-            if(vehiculoVerificar.getClass() == Carro.class) {
-                vehiculosCarros.add(vehiculo);
+            switch (tipo.toLowerCase()) {
+                case "carro":
+                    if (vehiculo instanceof Carro) {
+                        vehiculosPorTipo.add(vehiculo);
+                    }
+                    break;
+                case "moto":
+                    if (vehiculo instanceof Moto) {
+                        vehiculosPorTipo.add(vehiculo);
+                    }
+                    break;
+                case "camion":
+                    if (vehiculo instanceof Camion) {
+                        vehiculosPorTipo.add(vehiculo);
+                    }
+                    break;
+                default:
+                    System.out.println("Tipo de vehículo no encontrado: " + tipo);
             }
-            vehiculosPorTipo = vehiculosCarros;
         }
 
-        for (Vehiculo vehiculo : listVehiculos) {
-            if(vehiculoVerificar.getClass() == Moto.class) {
-                vehiculosMotos.add(vehiculo);
-            }
-            vehiculosPorTipo = vehiculosMotos;
-        }
-
-        for (Vehiculo vehiculo : listVehiculos) {
-            if(vehiculoVerificar.getClass() == Camion.class) {
-                vehiculosCamiones.add(vehiculo);
-            }
-            vehiculosPorTipo = vehiculosCamiones;
-        }
         return vehiculosPorTipo;
     }
+
 
     //asignar un vehiculo a un conductor
     public boolean asignarVehiculo(String placaVehiculo, String idConductor){
@@ -74,12 +74,17 @@ public class Empresa {
     }
 
     //obtener conductores que tienen al menos un camion asignado con una capacidad mayor a 10
-    public LinkedList<Conductor> obtenerConductoresCamionMas10Ton(Camion camionAux) {
+    public LinkedList<Conductor> obtenerConductoresCamionMas10Ton() {
         LinkedList<Conductor> conductoresCamionesMas10T = new LinkedList<>();
 
-        for(Conductor conductor : listConductores) {
-            if(conductor.getListvehiculos().contains(camionAux) && camionAux.getCapacidadCarga() > 10) {
-                conductoresCamionesMas10T.add(conductor);
+        for (Conductor conductor : listConductores) {
+            for (Vehiculo vehiculo : conductor.getListvehiculos()) {
+                if(vehiculo instanceof Camion) {
+                    Camion camion = (Camion) vehiculo;
+                        if(camion.getCapacidadCarga() > 10){
+                            conductoresCamionesMas10T.add(conductor);
+                        }
+                }
             }
         }
         return conductoresCamionesMas10T;

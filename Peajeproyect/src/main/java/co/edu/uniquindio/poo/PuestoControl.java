@@ -9,10 +9,10 @@ public class PuestoControl {
     private double valorTotal;
     private LinkedList<Vehiculo> listaVehiculos;
 
-    public PuestoControl(String nombre, String departamento, double valorTotal) {
+    public PuestoControl(String nombre, String departamento) {
         this.nombre = nombre;
         this.departamento = departamento;
-        this.valorTotal = valorTotal;
+        this.valorTotal = 0;
         listaVehiculos = new LinkedList<>();
     }
 
