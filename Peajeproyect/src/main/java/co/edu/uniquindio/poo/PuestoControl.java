@@ -16,11 +16,13 @@ public class PuestoControl {
         listaVehiculos = new LinkedList<>();
     }
 
+    //Calcular el valor del peaje de un vehículo X, actualiza el valor total recaudado
     public void actualizarValorTotal(Vehiculo vehiculoIndex) {
         double valorPeajeVehiculo = vehiculoIndex.calcularValorTarifa();
         this.valorTotal += valorPeajeVehiculo;
     }
 
+    //Consultar el total de dinero pagado en peajes por cada vehículo que una persona tiene asignado
     public String consultarValorTotal(Conductor conductorIndex) {
         String resultado = "";
         double valorPagado = 0;

@@ -85,7 +85,7 @@ public class Empresa {
         return conductoresCamionesMas10T;
     }
 
-    //obetener
+    //obetener recaudador por nombre y apellido
     public Recaudador obtenerRecaudadorNombre(String nombreBuscar, String apellidoBuscar) {
         for(Recaudador recaudador : listRecaudadores) {
             if(recaudador.getNombre().equals(nombreBuscar) && recaudador.getApellido().equals(apellidoBuscar)) {
